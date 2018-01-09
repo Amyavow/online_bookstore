@@ -576,10 +576,11 @@
 	 		$result .= '<td><p class="book-price">$'.$row['price'].'</p></td>';
 	 		$result .= '<td><p class="quantity">'.$row['amount'].'</p></td>';
 	 		$result .= '<td><p class="total">$'.$row['total_price'].'</p></td>';
-	 		$result .= '<td><form class="update"><input type="number" class="text-field qty">';
-	 		$result .= '<input type="submit" class="def-button change-qty" value="Change Qty" name="update_cart"></form>';
+	 		$result .= '<td><a href="change_quantity.php?book_id='.$row['book_id'].'" class="def-button remove-item">Change Quantity</a>';
 	 		$result .= '</td><td><a href="remove_cart.php?book_id='.$row['book_id'].'" class="def-button remove-item">Remove Item</a></td></tr>';
 	 	}
+
+	 	
 
 	 	return $result;
 	 }
@@ -617,6 +618,17 @@
 	 	}
 	 }
 
+	 function fetchCartbById($dbconn, $bookId)
+	 {
+	 	$stmt->prepare("SELECT * FROM `cart` WHERE `book_id`=:bookId");
+
+	 	$stmt->bindParam(':bookId', $bookId);
+	 	$stmt->execute();
+	 	$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+	 	return $row;
+	 }
+
 
 	 function removeFromCart($dbconn, $bookId)
 	 {
@@ -624,6 +636,22 @@
 	 	$stmt->bindParam(':bookId', $bookId);
 
 	 	$stmt->execute();
+
+	 }
+
+
+
+
+	 function updateCart($dbconn, $amount, $price, $cart_id)
+	 {
+	 	$total_price = $price * $amount;
+	 	$stmt = $dbconn->prepare("UPDATE `cart` SET `amount`=:amount, `total_price`=:total_price WHERE `cart_id`= :cart_id");
+
+	 	$data = array(':amount'=>$amount, ':total_price'=>$total_price, ':cart_id'=>$cart_id);
+
+	 	$stmt->execute($data);
+
+
 	 }
 
 

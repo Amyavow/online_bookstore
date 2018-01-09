@@ -37,7 +37,7 @@
 			<div>
 				<?php $errorinfo = displayErrors($error, 'product_name'); echo $errorinfo;  ?>
 				<label>Delete Product:</label>
-				<input type="text" name="product_name" placeholder="title" value="<?php echo $bookRow['title'];?>">
+				<input type="text" name="product_name" placeholder="title" value="<?php echo $bookRow['title'];?>" readonly>
 			</div>
 			
 

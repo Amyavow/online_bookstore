@@ -1,6 +1,7 @@
   <?php
     session_start();
     include '../include/db.php';
+    $bookId = $_SESSION['bookId'];
     include '../include/functions.php';
     $userId = $_SESSION['user_id'];
     checkUserLogin($conf, $userId);
@@ -27,8 +28,8 @@
       </thead>
       <tbody>
         <?php
-
         
+
         $viewCart= viewCart($conf, $userId);
         echo $viewCart;
 
@@ -43,7 +44,8 @@
         <a href="#"><p>2</p></a>
         <a href="#"><p>3</p></a>
       </div>
-      <a href="checkout.html"><button class="def-button checkout">Checkout</button></a>
+
+      <a href="checkout.php"><button class="def-button checkout">Checkout</button></a>
     </div>
     
   </div>
