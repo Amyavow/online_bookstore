@@ -21,7 +21,7 @@ session_start();
     $error = array();
         if (array_key_exists('update_qty', $_POST)) {
           if (empty($_POST['amount'])||$_POST['amount']<1) {
-            $error[] = "Choose a quantity";
+            $error['amount'] = "Choose a quantity";
           }
 
           if (empty($error)) {
@@ -29,16 +29,13 @@ session_start();
             $cart_id = $cart[0];
             $price = $cart['price'];
 
-            echo '$'.$price;
+            
 
-            /*updateCart($conf, $_POST['amount'], $price, $cart_id);*/
+            updateCart($conf, $_POST['amount'], $price, $cart_id);
+            
 
             
-          }/*else{
-            foreach ($error as $err) {
-              echo '<p class="global-error">'.$err.'</p>';
-            }
-          }*/
+          }
         }
 
 
@@ -46,6 +43,7 @@ session_start();
 
 <div class="main">
     <div class="registration-form">
+    	<?php if (isset($error['amount'])) { echo '<p class="global-error" style="text-align:center">'.$error['amount'].'</p>'; }  ?>
       <form class="def-modal-form" method="post" action="">
         <label for="registration-from" class="header"><h3>Update quantity</h3></label>
         <input type="number" class="text-field first-name" name="amount">

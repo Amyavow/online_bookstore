@@ -620,7 +620,7 @@
 
 	 function fetchCartbById($dbconn, $bookId)
 	 {
-	 	$stmt->prepare("SELECT * FROM `cart` WHERE `book_id`=:bookId");
+	 	$stmt= $dbconn->prepare("SELECT * FROM `cart` WHERE `book_id`=:bookId");
 
 	 	$stmt->bindParam(':bookId', $bookId);
 	 	$stmt->execute();
@@ -650,6 +650,8 @@
 	 	$data = array(':amount'=>$amount, ':total_price'=>$total_price, ':cart_id'=>$cart_id);
 
 	 	$stmt->execute($data);
+
+	 	header("location:cart.php");
 
 
 	 }
