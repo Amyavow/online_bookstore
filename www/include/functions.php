@@ -578,7 +578,7 @@
 	 		$result .= '<td><p class="total">$'.$row['total_price'].'</p></td>';
 	 		$result .= '<td><form class="update"><input type="number" class="text-field qty">';
 	 		$result .= '<input type="submit" class="def-button change-qty" value="Change Qty" name="update_cart"></form>';
-	 		$result .= '</td><td><a href="remove_cart.php?book_id="'.$row['book_id'].' class="def-button remove-item">Remove Item</a></td></tr>';
+	 		$result .= '</td><td><a href="remove_cart.php?book_id='.$row['book_id'].'" class="def-button remove-item">Remove Item</a></td></tr>';
 	 	}
 
 	 	return $result;
@@ -588,10 +588,11 @@
 	 {
 	 	$price = $product['price'];
 	 	$totalPrice = $price * $amount;
+	 	$image_path = $product['image_path'];
 
-	 	$stmt = $dbconn->prepare("INSERT INTO `cart`(`price`, `amount`, `total_price`, `user_id`, `book_id`) VALUES(:price, :amount, :totalPrice, :userId, :bookId)");
+	 	$stmt = $dbconn->prepare("INSERT INTO `cart`(`price`, `amount`, `total_price`, `image_path`, `user_id`, `book_id`) VALUES(:price, :amount, :totalPrice, :image_path, :userId, :bookId)");
 
-	 	$data = array(':price'=>$price, ':amount' => $amount , ':totalPrice'=>$totalPrice, ':userId'=>$userId, ':bookId'=>$bookId);
+	 	$data = array(':price'=>$price, ':amount' => $amount , ':totalPrice'=>$totalPrice, ':image_path'=>$image_path, ':userId'=>$userId, ':bookId'=>$bookId);
 
 	 	$stmt->execute($data);
 	 }
@@ -615,7 +616,7 @@
 	 		header("location:index.php");
 	 	}
 	 }
-	 
+
 
 	 function removeFromCart($dbconn, $bookId)
 	 {
