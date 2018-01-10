@@ -656,5 +656,21 @@
 
 	 }
 
+	function fetchTotalPrice($dbconn, $userId)
+	{
+		$result ="";
+		$stmt= $dbconn->prepare("SELECT `total_price` FROM `cart` WHERE `user_id`=:userId");
+
+		$stmt->bindParam(':userId', $userId);
+
+		$stmt->execute();
+
+		$result = $stmt->fetchAll(PDO::FETCH_NUM);
+
+		return $result;
+
+
+	}
+
 
 ?>
