@@ -355,6 +355,30 @@
 		return $result;
 	}
 
+
+	function viewProductsByCatId($dbconn, $catId)
+	{
+		$result = "";
+
+		$stmt = $dbconn->prepare("SELECT * FROM `books` WHERE `category_id`=:catId");
+
+		$stmt->bindParam(':catId', $catId);
+
+		$stmt->execute();
+
+		while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+			$result .= '<li class="book"><a href="book_preview.php?book_id='.$row[0].'">';
+			$result .= '<div class="book-cover" style="background: url('.$row['image_path'].'); background-size: cover; background-position: center; background-repeat:no-repeat;">';
+			$result .= '</div></a>';
+			$result .= '<div class="book-price"><p>$'.$row['price'].'</p></div></li>';
+		}
+
+		return $result;
+	}
+
+
+
+
 	function viewProductList($dbconn)
 	{
 		$result ="";
