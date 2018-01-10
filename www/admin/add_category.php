@@ -11,7 +11,6 @@
 	$name = $_SESSION['name'];
 	$admin_id = $_SESSION['admin_id'];
 
-	echo "Welcome ". $name."."."Your admin id is ". $admin_id;
 	$error = array();
 
 	if (array_key_exists('add', $_POST)) {
