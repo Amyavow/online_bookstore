@@ -45,6 +45,16 @@
 		return $result;
 	}
 
+	function displayErrorsCheckout($err, $key)
+	{
+		$result = "";
+		if (isset($err[$key])) {
+			$result = '<span class = "global-error">'. $err[$key].'</span>';
+		}
+		return $result;
+	}
+
+
 
 
 	function adminRegister($dbconn, $input)
@@ -670,6 +680,14 @@
 		return $result;
 
 
+	}
+/*id, userid, book, phonenum, email, address, post code, total_price,*/
+	function insertToCheckout($dbconn, $userId, $phonenumber, $address, $post_code, $total_price)
+	{
+		$stmt= $dbconn->prepare("INSERT INTO `checkout`(`user_id`,`phone_number`,`address`,`post_code`,`total_price`) VALUES (:userId, :phonenumber, :address, :post_code, :total_price)");
+		$data = array(':userId' =>$userId, ':phonenumber'=>$phonenumber, ':address'=>$address, ':post_code'=>$post_code, ':total_price'=>$total_price);
+
+		$stmt->execute($data);
 	}
 
 
