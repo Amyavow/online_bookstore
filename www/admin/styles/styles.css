@@ -275,6 +275,8 @@ table#tab th {
 	border-bottom: 4px solid #ccc;
 }
 
+
+
 table#tab td {
 	font-size: 12px;
 	padding: 10px;
@@ -297,9 +299,9 @@ table#tab td a:hover {
 	border-color: #060c3b;
 }
 
-/*table#tab tr td:first-of-type {
+table#tab tr td:first-of-type {
 	width: 500px;
-}*/
+}
 
 
 .foot {

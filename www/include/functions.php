@@ -211,14 +211,15 @@
 		$stmt->execute();
 
 		while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
-			$result .= '<tr><td>'. $row[0].'<td>';
-			$result .= '<td>'.$row[1].'<td>';
+			$result .= '<tr><td>'. $row[0].'</td>';
+			$result .= '<td>'.$row[1].'</td>';
 			$result .= '<td><a href="edit_category.php?cat_id='.$row[0].'">edit</a></td>';
 			$result .= '<td><a href="delete_category.php?cat_id='.$row[0].'">delete</a></td></tr>';
 		}
 
 		return $result;
 	}
+
 
 
 
